@@ -96,15 +96,27 @@
       </div>
 
       <div id="fplinkArea">
-        <div class="fplinkAreaContent">
-          <h2>Books being read</h2>
-          <p>
-            There are a number of books being read online. You can join any one
-            of the groups and read along with the other members
-          </p>
-          To find out more, go to the
-          <a href="onlineRead.html">online reads page</a>.
-        </div>
+        <script id="read_template" type="template/handlebars">
+          {{#if being_read}}
+              <div class="fplinkAreaContent">
+              <h2>Books being read</h2>
+              <p>
+                  There are a number of books being read online. You can join any one
+                  of the groups and read along with the other members
+              </p>
+              To find out more, go to the
+              <a href="onlineRead.html">online reads page</a>.
+              </div>
+          {{/if}}
+        </script>
+        <span id="read_target"></span>
+
+        <script>
+          let read_src = document.getElementById("read_template").innerHTML;
+          let read_template = Handlebars.compile(read_src);
+          let read_rendered = read_template({ being_read: true });
+          document.getElementById("read_target").innerHTML = read_rendered;
+        </script>
 
         <div class="fplinkAreaContent">
           <h2>Local reading groups</h2>
