@@ -25,7 +25,7 @@
     <div class="grid-container-index">
       <header>
         <script id="template" type="template/handlebars">
-          <h1>{{caps "South london"}}</h1>
+          <h1>{{caps "South london" lower="yes"}}</h1>
         </script>
         <span id="target"></span>
         <object data="img/logo.svg"></object>
@@ -34,8 +34,10 @@
       <script>
         let src = document.getElementById("template").innerHTML;
         let template = Handlebars.compile(src);
-        Handlebars.registerHelper("caps", function (text) {
-          return text.toUpperCase();
+        Handlebars.registerHelper("caps", function (text, options) {
+          if (!options.hash.lower || options.hash.lower === "no")
+            return text.toUpperCase();
+          else return text.toLowerCase();
         });
         let rendered = template();
         document.getElementById("target").innerHTML = rendered;
