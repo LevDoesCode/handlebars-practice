@@ -1,0 +1,54 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.js"
+      integrity="sha512-MQkEjxbZvzs4TX8ES4/tTIyaYdtDlJzVocnPo0GoysTR0jCmNg0P2is7uqpCoWxmoS9X84CDVzuWgZD/R/Q2oQ=="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <script id="template" type="template/handlebars">
+      {{#bookpublished books}}
+      {{name}} is {{publishedyear}}<br>
+      {{/bookpublished}}
+    </script>
+
+    <script>
+      let src = document.getElementById("template").innerHTML;
+      let template = Handlebars.compile(src);
+      Handlebars.registerHelper("bookpublished", function (data, options) {
+        let len = data.length;
+        console.log("length: " + len);
+        let returnData = "";
+        for (let i = 0; i < len; i++) {
+          data[i].publishedyear =
+            data[i].publishedyear < 2019 ? "published" : "not published";
+          returnData += options.fn(data[i]);
+          console.log("returnData: " + returnData);
+        }
+        return returnData;
+      });
+      let context = {
+        books: [
+          {
+            "name": "book1",
+            "publishedyear": 2013,
+          },
+          {
+            "name": "book2",
+            "publishedyear": 2016,
+          },
+          {
+            "name": "book3",
+            "publishedyear": 2019,
+          },
+        ],
+      };
+      let rendered = template(context);
+      document.body.innerHTML += rendered;
+    </script>
+  </body>
+</html>
