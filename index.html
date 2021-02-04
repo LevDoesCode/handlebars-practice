@@ -97,7 +97,7 @@
 
       <div id="fplinkArea">
         <script id="read_template" type="template/handlebars">
-          {{#if being_read}}
+          {{#unless being_read}}
               <div class="fplinkAreaContent">
               <h2>Books being read</h2>
               <p>
@@ -107,7 +107,7 @@
               To find out more, go to the
               <a href="onlineRead.html">online reads page</a>.
               </div>
-          {{/if}}
+          {{/unless}}
         </script>
         <span id="read_target"></span>
 
