@@ -96,16 +96,34 @@
       </div>
 
       <div id="bestSellersList">
-        <h2>Best Sellers</h2>
-        <ol>
-          <li><b>The Woman in the Window</b> by <em>A.J.Finn</em></li>
-          <li><b>Stand By Me</b> by <em>S.D.Robertson</em></li>
-          <li><b>One in a Million</b> by <em>Lindsey Kelk</em></li>
-          <li><b>The Secret Wife</b> by <em>Gill Paul</em></li>
-          <li><b>Try Not to Breathe</b> by <em>Holly Seddon</em></li>
-          <li><b>The Stranger</b> by <em>Saskia Sarginson </em></li>
-        </ol>
+        <script id="template2" type="template/handlebars">
+          {{list bestsellers}}
+        </script>
+        <span id="target2"></span>
       </div>
+
+      <script>
+        let src2 = document.getElementById("template2").innerHTML;
+        let template2 = Handlebars.compile(src2);
+        Handlebars.registerHelper("list", function (list) {
+          let output = "<ol>";
+          for (let i in list) {
+            output += "<li>" + list[i] + "</li>";
+            console.log(i);
+          }
+          output += "</ol>";
+          console.log(output);
+          return output;
+        });
+        let rendered2 = template2({
+          bestsellers: [
+            "The Woman in the Window",
+            "The Stranger",
+            "The Secret Wife",
+          ],
+        });
+        document.getElementById("target2").innerHTML = rendered2;
+      </script>
 
       <footer>
         <div id="fpcontactInformation">
