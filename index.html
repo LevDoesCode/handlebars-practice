@@ -137,8 +137,16 @@
       </div>
 
       <div id="bestSellersList">
-        <script id="template2" type="template/handlebars">
+        <!-- <script id="template2" type="template/handlebars">
           {{list bestsellers}}
+        </script>
+        <span id="target2"></span> -->
+        <script id="template2" type="template/handlebars">
+          <ol>
+              {{#each bestseller}}
+              <li>{{this}}</li>
+              {{/each}}
+          </ol>
         </script>
         <span id="target2"></span>
       </div>
@@ -147,27 +155,27 @@
         let src2 = document.getElementById("template2").innerHTML;
         let template2 = Handlebars.compile(src2);
         // console.log(template2);
-        Handlebars.registerHelper("list", function (list) {
-          let output = "<ol>";
-          for (let i in list) {
-            output +=
-              "<li>" + Handlebars.Utils.escapeExpression(list[i]) + "</li>";
-          }
-          output += "</ol>";
-          //   console.log("Output: " + output);
-          let theNew = new Handlebars.SafeString(output);
-          //   console.log(theNew);
-          return theNew;
-        });
-        console.log(Handlebars);
+        // Handlebars.registerHelper("list", function (list) {
+        //   let output = "<ol>";
+        //   for (let i in list) {
+        //     output +=
+        //       "<li>" + Handlebars.Utils.escapeExpression(list[i]) + "</li>";
+        //   }
+        //   output += "</ol>";
+        //   //   console.log("Output: " + output);
+        //   let theNew = new Handlebars.SafeString(output);
+        //   //   console.log(theNew);
+        //   return theNew;
+        // });
+        // console.log(Handlebars);
         let rendered2 = template2({
-          bestsellers: [
+          bestseller: [
             "The Woman in the Window",
             "The Stranger",
             "The Secret Wife",
           ],
         });
-        console.log(rendered2);
+        // console.log(rendered2);
         document.getElementById("target2").innerHTML = rendered2;
       </script>
 
