@@ -58,8 +58,35 @@
 
       <div id="fpIntro">
         <div id="fpintroTitle">
-          <p>Welcome to South London Reading Club.</p>
+          <script id="greet_template" type="template/handlebars">
+            <p>{{greetings "example "}} South London Reading Club.</p>
+          </script>
+          <span id="greet_target"></span>
         </div>
+
+        <script>
+          let greet_src = document.getElementById("greet_template").innerHTML;
+          let greet_template = Handlebars.compile(greet_src);
+          Handlebars.registerHelper("greetings", function (text, options) {
+            console.log(options);
+            switch (options.data.language) {
+              case "en":
+                return "Welcome to ";
+              case "de":
+                return "Willkommen im ";
+              case "fr":
+                return "Bienvenue a ";
+              default:
+                return "Welcome to " + text + options.data.lol;
+            }
+          });
+          let greet_rendered = greet_template(
+            {},
+            { data: { language: "de", lol: "lel" } }
+          );
+          document.getElementById("greet_target").innerHTML = greet_rendered;
+        </script>
+
         <div id="fpintroText">
           <p>
             The South London Reading Club is an online community of book readers
