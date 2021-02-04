@@ -1,0 +1,23 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handlebars Expressions</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.js"
+      integrity="sha512-MQkEjxbZvzs4TX8ES4/tTIyaYdtDlJzVocnPo0GoysTR0jCmNg0P2is7uqpCoWxmoS9X84CDVzuWgZD/R/Q2oQ=="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <script id="template" type="template/handlebars">
+        {{{content}}}
+    </script>
+    <script>
+        let src = document.getElementById("template").innerHTML;
+        let template = Handlebars.compile(src);
+        let output = template({content: "<h1>Hello</h1>"});
+        document.body.innerHTML += output;
+    </script>
+  </body>
+</html>
