@@ -20,6 +20,7 @@
       let src = document.getElementById("template").innerHTML;
       let template = Handlebars.compile(src);
       Handlebars.registerHelper("bookpublished", function (data, options) {
+        console.log(options);
         let len = data.length;
         console.log("length: " + len);
         let returnData = "";
